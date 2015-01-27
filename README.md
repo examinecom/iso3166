@@ -52,7 +52,7 @@ _How to use with composer_
         }
     ],
 	"require": {
-		"kzap/iso3166": "dev-master"
+		"julien-c/iso3166": "dev-master"
 	}
 }
 ```
