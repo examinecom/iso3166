@@ -256,8 +256,57 @@ class Codes
 	
 	
 	public static function map($code)
+	{	
+		$code = strtoupper($code);
+
+		return (isset(static::$countries[$code])) ? static::$countries[$code] : false;
+	}
+
+	public static function reverse_map($name)
 	{
-		return (isset(static::$countries[$code])) ? static::$countries[$code] : 'Unknown';
+		$name = strtolower($name);
+		$countries = array_map('strtolower', static::$countries);
+
+		foreach ($countries as $code => $country) {
+			if ($country == $name || str_replace(' ', '', $country) == str_replace(' ', '', $name)) {
+				return $code;
+			}
+		}
+
+		return false;
+	}
+
+	public static function search($query)
+	{
+		$results = array();
+
+		$query = strtolower($query);
+		$countries = array_map('strtolower', static::$countries);
+
+		foreach ($countries as $code => $country) {
+			if ($country == $query || str_replace(' ', '', $country) == str_replace(' ', '', $query)) {
+				$results[] = array(
+					$code => static::$countries[$code],
+				);
+				continue;
+			}
+
+			// search for partial matches if > 3 letter string
+			if (strlen($query) > 3) {
+				if (stristr($country, $query) !== false || stristr(str_replace(' ', '', $country), $query) !== false) {
+					$results[] = array(
+						$code => static::$countries[$code],
+					);
+					continue;
+				}
+			}
+		}
+
+		if (!empty($results)) {
+			return $results;
+		}
+
+		return false;
 	}
 	
 	public static function isValid($code)
