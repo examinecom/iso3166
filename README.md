@@ -40,3 +40,19 @@ will output:
   ...
 </select>
 ```
+
+_How to use with composer_
+
+```javascript
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/kzap/iso3166"
+        }
+    ],
+	"require": {
+		"kzap/iso3166": "dev-master"
+	}
+}
+```
