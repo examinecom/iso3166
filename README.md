@@ -8,6 +8,22 @@ echo Iso3166\Codes::map('FR');
 // 'France'
 ```
 
+```php
+echo Iso3166\Codes::reverse_map('france');
+// 'FR'
+```
+
+```php
+echo Iso3166\Codes::search('fran');
+/* 
+Array (
+    [0] => Array (
+        [FR] => France
+    )	
+)
+*/
+```
+
 Plus one super handy helper:
 
 ```php
